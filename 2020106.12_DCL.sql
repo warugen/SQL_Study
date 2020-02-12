@@ -1,28 +1,28 @@
 
 ------------------------------------------------------------------------------------------
--- DCL (CREATE USER, ALTER USER, GRANT, REVOKE, DROP USER) -DBA ±ÇÇÑÀÌ ÀÖÀ»¶§¸¸ °¡´É
+-- DCL (CREATE USER, ALTER USER, GRANT, REVOKE, DROP USER) -DBA ê¶Œí•œì´ ìžˆì„ë•Œë§Œ ê°€ëŠ¥
 ------------------------------------------------------------------------------------------
 
-CREATE USER HONG IDENTIFIED BY HONG; -- »ç¿ëÀÚ»ý¼º ¹× ºñ¹Ð¹øÈ£ ¼³Á¤
-ALTER USER HONG IDENTIFIED BY TIGER; -- ºñ¹Ð¹øÈ£ º¯°æ
+CREATE USER HONG IDENTIFIED BY HONG; -- ì‚¬ìš©ìžìƒì„± ë° ë¹„ë°€ë²ˆí˜¸ ì„¤ì •
+ALTER USER HONG IDENTIFIED BY TIGER; -- ë¹„ë°€ë²ˆí˜¸ ë³€ê²½
 
 SELECT * FROM EMPV1;
 
-GRANT CREATE SESSION TO HONG; -- ·Î±×ÀÎÀÌ °¡´ÉÇÏ°Ô ¸¸µå´Â ¼¼¼Ç
+GRANT CREATE SESSION TO HONG; -- ë¡œê·¸ì¸ì´ ê°€ëŠ¥í•˜ê²Œ ë§Œë“œëŠ” ì„¸ì…˜
 
--- ¿©·¯¹ø GRANT(±ÇÇÑºÎ¿©)ÇÏÁö ¾Ê°í ±ÇÇÑ°´Ã¼¸¦ ¸¸µé¾î¼­ ÇÑ¹ø¿¡ ±ÇÇÑÀ» ÁÖ´Â°Ô ¸ñÀû
-CREATE ROLE ROLLEX1; -- ROLLEX1 ±ÇÇÑ°´Ã¼ »ý¼º
+-- ì—¬ëŸ¬ë²ˆ GRANT(ê¶Œí•œë¶€ì—¬)í•˜ì§€ ì•Šê³  ê¶Œí•œê°ì²´ë¥¼ ë§Œë“¤ì–´ì„œ í•œë²ˆì— ê¶Œí•œì„ ì£¼ëŠ”ê²Œ ëª©ì 
+CREATE ROLE ROLLEX1; -- ROLLEX1 ê¶Œí•œê°ì²´ ìƒì„±
 
--- ROLLEX1°¡ ÇÒ¼öÀÖ´Â ±ÇÇÑºÎ¿©(·Î±×ÀÎ, Å×ÀÌºí»ý¼º, ºä»ý¼º)
+-- ROLLEX1ê°€ í• ìˆ˜ìžˆëŠ” ê¶Œí•œë¶€ì—¬(ë¡œê·¸ì¸, í…Œì´ë¸”ìƒì„±, ë·°ìƒì„±)
 GRANT CREATE SESSION, CREATE TABLE, CREATE VIEW TO ROLLEX1; 
 
-GRANT ROLLEX1 TO HONG; -- HONG¿¡°Ô ROLLEX1±ÇÇÑÀ» ºÎ¿©
+GRANT ROLLEX1 TO HONG; -- HONGì—ê²Œ ROLLEX1ê¶Œí•œì„ ë¶€ì—¬
 
-GRANT SELECT ON EMPV1 TO HONG; -- HONGÀº SCOTTÀÌ °¡Áö°í ÀÖ´Â EMPV1 Å×ÀÌºíÀ» SELECT
+GRANT SELECT ON EMPV1 TO HONG; -- HONGì€ SCOTTì´ ê°€ì§€ê³  ìžˆëŠ” EMPV1 í…Œì´ë¸”ì„ SELECT
 
 SHOW USER;
 
-GRANT ALL ON EMPV1 TO HONG; -- HONG¿¡°Ô SCOTT.EMPV1ÀÇ ¸ðµç±ÇÇÑÀ» ÁØ´Ù
+GRANT ALL ON EMPV1 TO HONG; -- HONGì—ê²Œ SCOTT.EMPV1ì˜ ëª¨ë“ ê¶Œí•œì„ ì¤€ë‹¤
 
 SELECT * FROM EMPV1;
 
@@ -30,42 +30,12 @@ SELECT * FROM EMP;
 
 GRANT ALL ON SALGRADE TO HONG;
 
-REVOKE ALL ON SALGRADE FROM HONG; -- SALGRADE¿¡ ´ëÇÑ ¸ðµç±ÇÇÑ ¹ÚÅ»
+REVOKE ALL ON SALGRADE FROM HONG; -- SALGRADEì— ëŒ€í•œ ëª¨ë“ ê¶Œí•œ ë°•íƒˆ
 
 GRANT SELECT ON SALGRADE TO HONG;
 
--- HONGÀ» ¸ÕÀú Á¢¼ÓÇØÀçÇÑ´Ù
-DROP USER HONG CASCADE; -- HONG»ç¿ëÀÚ »èÁ¦
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-- HONGì„ ë¨¼ì € ì ‘ì†í•´ìž¬í•œë‹¤
+DROP USER HONG CASCADE; -- HONGì‚¬ìš©ìž ì‚­ì œ
 
 
 

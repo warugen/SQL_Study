@@ -1,18 +1,18 @@
 ------------------------------------------------------------------------------------------
--- SEQUENCE : ¼øÂ÷¹øÈ£ ÀÚµ¿ »ý¼º °´Ã¼ (PRIMARY KEY¿¡¼­ ¼øÂ÷¹øÈ£ »ý¼ºÀÌ ÇÊ¿äÇÒ¶§)
+-- SEQUENCE : ìˆœì°¨ë²ˆí˜¸ ìžë™ ìƒì„± ê°ì²´ (PRIMARY KEYì—ì„œ ìˆœì°¨ë²ˆí˜¸ ìƒì„±ì´ í•„ìš”í• ë•Œ)
 ------------------------------------------------------------------------------------------
 
--- ¼øÂ÷¹øÈ£(PK), Ä£±¸ÀÌ¸§, ÀüÈ­, ÃÖÁ¾¼öÁ¤ÀÏ
--- 1 È«±æµ¿ 010-9999-9999 19/12/30
--- 2 ±è±æµ¿ NULL 19/12/30
+-- ìˆœì°¨ë²ˆí˜¸(PK), ì¹œêµ¬ì´ë¦„, ì „í™”, ìµœì¢…ìˆ˜ì •ì¼
+-- 1 í™ê¸¸ë™ 010-9999-9999 19/12/30
+-- 2 ê¹€ê¸¸ë™ NULL 19/12/30
 DROP SEQUENCE FRIEND_SEQNO;
 CREATE SEQUENCE FRIEND_SEQNO
     INCREMENT BY 1
     START WITH 1
     MAXVALUE 9999
-    NOCYCLE -- 9999°¡ ³¡³ª¸é ´õÀÌ»ó ¸¸µé¾îÁöÁö ¾Ê´Â´Ù.
-    --CYCLE : 9999°¡ ³¡³ª¸é ´Ù½Ã 1ºÎÅÍ ¸¸µé¾îÁø´Ù.
-    NOCACHE;    -- Ä³½Ã¸Þ¸ð¸®¿¡ ¹Ì¸® ¸¸µé¾î³õÁö ¾Ê´Â´Ù.
+    NOCYCLE -- 9999ê°€ ëë‚˜ë©´ ë”ì´ìƒ ë§Œë“¤ì–´ì§€ì§€ ì•ŠëŠ”ë‹¤.
+    --CYCLE : 9999ê°€ ëë‚˜ë©´ ë‹¤ì‹œ 1ë¶€í„° ë§Œë“¤ì–´ì§„ë‹¤.
+    NOCACHE;    -- ìºì‹œë©”ëª¨ë¦¬ì— ë¯¸ë¦¬ ë§Œë“¤ì–´ë†“ì§€ ì•ŠëŠ”ë‹¤.
     
 DROP TABLE FRIEND;
 CREATE TABLE FRIEND (
@@ -21,37 +21,37 @@ CREATE TABLE FRIEND (
     TEL VARCHAR2(30) UNIQUE,
     LAST_MODIFIED DATE DEFAULT SYSDATE);
 
-INSERT INTO FRIEND (NUM, NAME, TEL, LAST_MODIFIED) VALUES( FRIEND_SEQNO.NEXTVAL, 'È«±æµ¿', '010-9999-9999', SYSDATE);
-INSERT INTO FRIEND (NUM, NAME, TEL, LAST_MODIFIED) VALUES( FRIEND_SEQNO.NEXTVAL, '±è±æµ¿', NULL, SYSDATE);
+INSERT INTO FRIEND (NUM, NAME, TEL, LAST_MODIFIED) VALUES( FRIEND_SEQNO.NEXTVAL, 'í™ê¸¸ë™', '010-9999-9999', SYSDATE);
+INSERT INTO FRIEND (NUM, NAME, TEL, LAST_MODIFIED) VALUES( FRIEND_SEQNO.NEXTVAL, 'ê¹€ê¸¸ë™', NULL, SYSDATE);
 
 SELECT * FROM FRIEND;
 
-SELECT FRIEND_SEQNO.CURRVAL FROM DUAL; -- ÇöÀç ½ÃÄö½º°ª È®ÀÎÇÏ±â
+SELECT FRIEND_SEQNO.CURRVAL FROM DUAL; -- í˜„ìž¬ ì‹œí€€ìŠ¤ê°’ í™•ì¸í•˜ê¸°
 
--- 1~4 ´ÙÀ½°ú °°Àº ±¸Á¶ÀÇ Å×ÀÌºíÀ» »ý¼ºÇÏ±â À§ÇÑ Å×ÀÌºí »ý¼ºÇÏ´Â SQL¹®À» ÀÛ¼º.
+-- 1~4 ë‹¤ìŒê³¼ ê°™ì€ êµ¬ì¡°ì˜ í…Œì´ë¸”ì„ ìƒì„±í•˜ê¸° ìœ„í•œ í…Œì´ë¸” ìƒì„±í•˜ëŠ” SQLë¬¸ì„ ìž‘ì„±.
 /*  
-[ customer Å×ÀÌºí ] - cno°¡ ÁÖÅ°, phoneÀº ´Ù¸¥»ç¶÷°ú ´Ù¸£°Ô ÀÔ·ÂµÇµµ·Ï Á¦ÇÑÇÔ
-		      joindate´Â ÀÔ·ÂÇÏÁö ¾ÊÀ»½Ã ÇöÀç³¯Â¥·Î ÀÔ·Â
+[ customer í…Œì´ë¸” ] - cnoê°€ ì£¼í‚¤, phoneì€ ë‹¤ë¥¸ì‚¬ëžŒê³¼ ë‹¤ë¥´ê²Œ ìž…ë ¥ë˜ë„ë¡ ì œí•œí•¨
+		      joindateëŠ” ìž…ë ¥í•˜ì§€ ì•Šì„ì‹œ í˜„ìž¬ë‚ ì§œë¡œ ìž…ë ¥
   cno    cname   joindate    phone         point  levelno
-   1   È«±æµ¿   17/10/17  010-9999-9999     300     1
-   2   ÀÌÃ¶¼ö   16/09/06  010-9999-9888    NULL     2
-   3   È«±æ¼ø   16/09/07  010-9999-7777      50     3
-[ cus_level Å×ÀÌºí ] - levelno°¡ ÁÖÅ°, levelnameÀº NOT NULL Á¶°Ç.
+   1   í™ê¸¸ë™   17/10/17  010-9999-9999     300     1
+   2   ì´ì² ìˆ˜   16/09/06  010-9999-9888    NULL     2
+   3   í™ê¸¸ìˆœ   16/09/07  010-9999-7777      50     3
+[ cus_level í…Œì´ë¸” ] - levelnoê°€ ì£¼í‚¤, levelnameì€ NOT NULL ì¡°ê±´.
        levelno     levelname
    	1            VVIP
    	2             VIP           
    	3            NORMAL
    	4            BLACK
-Á¶°Ç¨ç CUSTOMER Å×ÀÌºíÀÌ ÀÖÀ» ½Ã, Å×ÀÌºíÀ» »èÁ¦ÇÏ°í Å×ÀÌºíÀ» »ý¼ºÇÏ½Ã¿À */
+ì¡°ê±´â‘  CUSTOMER í…Œì´ë¸”ì´ ìžˆì„ ì‹œ, í…Œì´ë¸”ì„ ì‚­ì œí•˜ê³  í…Œì´ë¸”ì„ ìƒì„±í•˜ì‹œì˜¤ */
 DROP TABLE CUSTOMER;
 DROP TABLE CUS_LEVEL;
 /*
-Á¶°Ç¨è CUSTOMER Å×ÀÌºíÀº ÇÊµåº°·Î ´ÙÀ½ÀÇ Á¦¾àÁ¶°ÇÀ» ÁöÅ²´Ù.
-	CNO : ÁÖÅ°
-	CNAME : NULL°ªÀ» ÀÔ·ÂÇÒ ¼ö ¾ø´Ù
-	JOINDATE : ÀÔ·ÂÇÏÁö ¾ÊÀ» ½Ã, ±âº»ÀûÀ¸·Î ÇöÀç³¯Â¥·Î ÀÔ·ÂµÈ´Ù
-	PHONE : ¸ðµç µ¥ÀÌÅÍ´Â PHONE °ªÀÌ ¸ðµÎ ´Ù¸£°Ô ÀÔ·ÂµÈ´Ù
-	LEVELNO : CUS_LEVEL Å×ÀÌºíÀÇ LEVELNO ÇÊµå¸¦ ÂüÁ¶ÇÏ´Â ¿Ü·¡Å° */
+ì¡°ê±´â‘¡ CUSTOMER í…Œì´ë¸”ì€ í•„ë“œë³„ë¡œ ë‹¤ìŒì˜ ì œì•½ì¡°ê±´ì„ ì§€í‚¨ë‹¤.
+	CNO : ì£¼í‚¤
+	CNAME : NULLê°’ì„ ìž…ë ¥í•  ìˆ˜ ì—†ë‹¤
+	JOINDATE : ìž…ë ¥í•˜ì§€ ì•Šì„ ì‹œ, ê¸°ë³¸ì ìœ¼ë¡œ í˜„ìž¬ë‚ ì§œë¡œ ìž…ë ¥ëœë‹¤
+	PHONE : ëª¨ë“  ë°ì´í„°ëŠ” PHONE ê°’ì´ ëª¨ë‘ ë‹¤ë¥´ê²Œ ìž…ë ¥ëœë‹¤
+	LEVELNO : CUS_LEVEL í…Œì´ë¸”ì˜ LEVELNO í•„ë“œë¥¼ ì°¸ì¡°í•˜ëŠ” ì™¸ëž˜í‚¤ */
 CREATE TABLE CUS_LEVEL (
     LEVELNO NUMBER(1) PRIMARY KEY,
     LEVELNAME VARCHAR2(20) NOT NULL
@@ -79,21 +79,21 @@ CREATE TABLE CUSTOMER (
     LEVELNO NUMBER(1) REFERENCES CUS_LEVEL(LEVELNO)
     );
 
-INSERT INTO CUSTOMER VALUES (CUS_SQ.NEXTVAL, 'È«±æµ¿', TO_DATE('20171017', 'YYYYMMDD'), '010-9999-9999', 300, 1);
-INSERT INTO CUSTOMER VALUES (CUS_SQ.NEXTVAL, 'ÀÌÃ¶¼ö', TO_DATE('20160906', 'YYYYMMDD'), '010-9999-9888', NULL, 2);
-INSERT INTO CUSTOMER VALUES (CUS_SQ.NEXTVAL, 'È«±æ¼ø', TO_DATE('20160907', 'YYYYMMDD'), '010-9999-7777', 50, 3);
+INSERT INTO CUSTOMER VALUES (CUS_SQ.NEXTVAL, 'í™ê¸¸ë™', TO_DATE('20171017', 'YYYYMMDD'), '010-9999-9999', 300, 1);
+INSERT INTO CUSTOMER VALUES (CUS_SQ.NEXTVAL, 'ì´ì² ìˆ˜', TO_DATE('20160906', 'YYYYMMDD'), '010-9999-9888', NULL, 2);
+INSERT INTO CUSTOMER VALUES (CUS_SQ.NEXTVAL, 'í™ê¸¸ìˆœ', TO_DATE('20160907', 'YYYYMMDD'), '010-9999-7777', 50, 3);
 /*
-Á¶°Ç¨é CUS_LEVEL Å×ÀÌºíÀº ÇÊµåº°·Î ´ÙÀ½ÀÇ Á¦¾àÁ¶°ÇÀ» ÁöÅ²´Ù
-	LEVELNO : ÁÖÅ°
-	LEVELNAME : NULL°ªÀ» ÀÔ·ÂÇÒ ¼ö ¾ø´Ù
-Á¶°Ç¨ê CUSTOMER Å×ÀÌºíÀÇ CNO¹øÈ£´Â ½ÃÄö½º(CUS_SQ)¸¦ »ý¼ºÇÑ µÚ ÀÚµ¿»ý¼º ¹øÈ£·Î ÀÔ·ÂµÇµµ·Ï ÇÑ´Ù
-Á¶°Ç¨ë À§ Å×ÀÌºíÃ³·³ µ¥ÀÌÅÍ ÀÔ·Â
+ì¡°ê±´â‘¢ CUS_LEVEL í…Œì´ë¸”ì€ í•„ë“œë³„ë¡œ ë‹¤ìŒì˜ ì œì•½ì¡°ê±´ì„ ì§€í‚¨ë‹¤
+	LEVELNO : ì£¼í‚¤
+	LEVELNAME : NULLê°’ì„ ìž…ë ¥í•  ìˆ˜ ì—†ë‹¤
+ì¡°ê±´â‘£ CUSTOMER í…Œì´ë¸”ì˜ CNOë²ˆí˜¸ëŠ” ì‹œí€€ìŠ¤(CUS_SQ)ë¥¼ ìƒì„±í•œ ë’¤ ìžë™ìƒì„± ë²ˆí˜¸ë¡œ ìž…ë ¥ë˜ë„ë¡ í•œë‹¤
+ì¡°ê±´â‘¤ ìœ„ í…Œì´ë¸”ì²˜ëŸ¼ ë°ì´í„° ìž…ë ¥
 
-5. À§¿Í °°Àº µÎ°³ÀÇ Å×ÀÌºíÀ» ÀÌ¿ëÇÏ¿© ¾Æ·¡¿Í °°ÀÌ Ãâ·ÂÇÏ´Â SQL¹®µµ ÀÛ¼ºÇÏ½Ã¿À
+5. ìœ„ì™€ ê°™ì€ ë‘ê°œì˜ í…Œì´ë¸”ì„ ì´ìš©í•˜ì—¬ ì•„ëž˜ì™€ ê°™ì´ ì¶œë ¥í•˜ëŠ” SQLë¬¸ë„ ìž‘ì„±í•˜ì‹œì˜¤
   cno    cname   joindate    phone         point  levelname
-   1   È«±æµ¿   2017-10-17  010-9999-9999     300     VVIP
-   2   ÀÌÃ¶¼ö   2016-09-06  010-9999-9888    NULL     VIP
-   3   È«±æ¼ø   2016-09-07  010-9999-7777      50     NORMAL
+   1   í™ê¸¸ë™   2017-10-17  010-9999-9999     300     VVIP
+   2   ì´ì² ìˆ˜   2016-09-06  010-9999-9888    NULL     VIP
+   3   í™ê¸¸ìˆœ   2016-09-07  010-9999-7777      50     NORMAL
 */   
    
 
@@ -102,46 +102,46 @@ FROM CUSTOMER C, CUS_LEVEL L
 WHERE C.LEVELNO = L.LEVELNO;
 
 ------------------------------------------------------------------------------------------
--- VIEW(°¡»óÀÇ Å×ÀÌºí)
+-- VIEW(ê°€ìƒì˜ í…Œì´ë¸”)
 ------------------------------------------------------------------------------------------
 CREATE OR REPLACE VIEW EMPV0
-    AS SELECT EMPNO, ENAME, JOB, DEPTNO FROM EMP; -- ´Ü¼øºä
+    AS SELECT EMPNO, ENAME, JOB, DEPTNO FROM EMP; -- ë‹¨ìˆœë·°
 
 SELECT * FROM EMPV0 WHERE DEPTNO = 20;
 
 CREATE OR REPLACE VIEW EMPV0
     AS SELECT EMPNO, ENAME, JOB, DNAME FROM EMP E, DEPT D
-        WHERE E.DEPTNO=D.DEPTNO; -- º¹ÇÕºä
+        WHERE E.DEPTNO=D.DEPTNO; -- ë³µí•©ë·°
 
 SELECT * FROM EMPV0;
 
--- ºÎ¼­¹øÈ£°¡ 30ÀÎ ºÎ¼­Á÷¿øµé¸¸ EMPV1 ºä»ý¼º
+-- ë¶€ì„œë²ˆí˜¸ê°€ 30ì¸ ë¶€ì„œì§ì›ë“¤ë§Œ EMPV1 ë·°ìƒì„±
 CREATE OR REPLACE VIEW EMPV1
     AS SELECT * FROM EMP WHERE DEPTNO=30;
 
 SELECT * FROM EMPV1;
 
-INSERT INTO EMPV1 VALUES(1111,'È«',NULL,NULL,SYSDATE,NULL,NULL,40);
+INSERT INTO EMPV1 VALUES(1111,'í™',NULL,NULL,SYSDATE,NULL,NULL,40);
 
 SELECT * FROM EMP;
 
 CREATE OR REPLACE VIEW EMPV1
-    AS SELECT * FROM EMP WHERE DEPTNO=30 WITH CHECK OPTION; -- 30¹ø ºÎ¼­ÀÇ Á÷¿ø¸¸ W/R°¡´É
+    AS SELECT * FROM EMP WHERE DEPTNO=30 WITH CHECK OPTION; -- 30ë²ˆ ë¶€ì„œì˜ ì§ì›ë§Œ W/Rê°€ëŠ¥
 
-INSERT INTO EMPV1 VALUES(1112,'È«',NULL,NULL,SYSDATE,NULL,NULL,40); -- ½ÇÇàºÒ°¡
-INSERT INTO EMPV1 VALUES(1112,'È«',NULL,NULL,SYSDATE,NULL,NULL,30); -- ½ÇÇà°¡´É
+INSERT INTO EMPV1 VALUES(1112,'í™',NULL,NULL,SYSDATE,NULL,NULL,40); -- ì‹¤í–‰ë¶ˆê°€
+INSERT INTO EMPV1 VALUES(1112,'í™',NULL,NULL,SYSDATE,NULL,NULL,30); -- ì‹¤í–‰ê°€ëŠ¥
 
 CREATE OR REPLACE VIEW EMPV2
-    AS SELECT * FROM EMP WHERE DEPTNO=30 WITH READ ONLY; -- SELECT¸¸ °¡´É
+    AS SELECT * FROM EMP WHERE DEPTNO=30 WITH READ ONLY; -- SELECTë§Œ ê°€ëŠ¥
 
-INSERT INTO EMPV2 VALUES(1113,'È«',NULL,NULL,SYSDATE,NULL,NULL,30); -- ½ÇÇàºÒ°¡
+INSERT INTO EMPV2 VALUES(1113,'í™',NULL,NULL,SYSDATE,NULL,NULL,30); -- ì‹¤í–‰ë¶ˆê°€
 
--- INSERT ºÒ°¡´ÉÇÑ °æ¿ì
+-- INSERT ë¶ˆê°€ëŠ¥í•œ ê²½ìš°
 CREATE OR REPLACE VIEW EMPV3
     AS SELECT ENAME, SAL, COMM FROM EMP;
 
 SELECT * FROM EMPV3;
-INSERT INTO EMPV3 VALUES('È«',9000,5000);
+INSERT INTO EMPV3 VALUES('í™',9000,5000);
 
 CREATE OR REPLACE VIEW SALV1
     AS SELECT EMPNO, ENAME, SAL*12 AS YEARSAL FROM EMP WHERE DEPTNO=10;
@@ -151,7 +151,7 @@ SELECT * FROM SALV1 WHERE YEARSAL > 20000;
 CREATE OR REPLACE VIEW SALV1 (ID, NAME, YEARSAL)
     AS SELECT EMPNO, ENAME, SAL*12 FROM EMP WHERE DEPTNO=10;
 
-INSERT INTO SALV1 VALUES(119,'È«',12000); -- ½ÇÇàºÒ°¡
+INSERT INTO SALV1 VALUES(119,'í™',12000); -- ì‹¤í–‰ë¶ˆê°€
 SELECT * FROM SALV1;
 
 CREATE OR REPLACE VIEW DEPTV1 (DEPTNO, MINSAL, MAXSAL, AVGSAL)
@@ -165,12 +165,12 @@ CREATE OR REPLACE VIEW JOBLIST
 SELECT * FROM JOBLIST;
 
 ------------------------------------------------------------------------------------------
--- inline VIEW : FROM ÀýÀÇ ¼­ºêÄõ¸®
+-- inline VIEW : FROM ì ˆì˜ ì„œë¸Œì¿¼ë¦¬
 ------------------------------------------------------------------------------------------
--- ±Þ¿©°¡ 2000À» ÃÊ°úÇÏ´Â »ç¿øÀÇ Æò±Õ ±Þ¿©Ãâ·Â
+-- ê¸‰ì—¬ê°€ 2000ì„ ì´ˆê³¼í•˜ëŠ” ì‚¬ì›ì˜ í‰ê·  ê¸‰ì—¬ì¶œë ¥
 SELECT AVG(SAL) FROM (SELECT SAL FROM EMP WHERE SAL>2000);
 
--- ÀÌ¸§, ±Þ¿©, ºÎ¼­¹øÈ£, ÇØ´ç»ç¿øÀÇ ºÎ¼­±Þ¿©Æò±Õ±Þ¿©
+-- ì´ë¦„, ê¸‰ì—¬, ë¶€ì„œë²ˆí˜¸, í•´ë‹¹ì‚¬ì›ì˜ ë¶€ì„œê¸‰ì—¬í‰ê· ê¸‰ì—¬
 SELECT ENAME, SAL, DEPTNO, (SELECT AVG(SAL) FROM EMP WHERE DEPTNO=E.DEPTNO)
 FROM EMP E;
 
@@ -181,7 +181,7 @@ SELECT E.ENAME, E.SAL, E.DEPTNO, S.AVGSAL
 FROM EMP E, (SELECT DEPTNO, AVG(SAL) AVGSAL FROM EMP GROUP BY DEPTNO) S
 WHERE E.DEPTNO=S.DEPTNO;
 
--- ÀÌ¸§, ±Þ¿©, ºÎ¼­¹øÈ£, ºÎ¼­Æò±Õ±Þ¿© (ºÎ¼­Æò±Õº¸´Ù ¸¹ÀÌ ¹Þ´Â »ç¿ø¸¸ Ãâ·Â)
+-- ì´ë¦„, ê¸‰ì—¬, ë¶€ì„œë²ˆí˜¸, ë¶€ì„œí‰ê· ê¸‰ì—¬ (ë¶€ì„œí‰ê· ë³´ë‹¤ ë§Žì´ ë°›ëŠ” ì‚¬ì›ë§Œ ì¶œë ¥)
 SELECT DEPTNO, AVG(SAL) AVGSAL FROM EMP GROUP BY DEPTNO;
 
 SELECT E.ENAME, E.SAL, S.DEPTNO, AVGSAL
@@ -190,80 +190,53 @@ WHERE E.DEPTNO=S.DEPTNO
 AND E.SAL > S.AVGSAL;
 
 ------------------------------------------------------------------------------------------
--- TOP N ±¸¹®
+-- TOP N êµ¬ë¬¸
 ------------------------------------------------------------------------------------------
-SELECT ROWNUM, ENAME, SAL FROM EMP; -- ROWNUM: EMPÅ×ÀÌºí¿¡¼­ °¡Á®¿Â ¼ø¼­
--- SALµî¼ö, ENAME, SAL
-SELECT ROWNUM, ENAME, SAL FROM EMP ORDER BY SAL DESC; -- µî¼ö°¡ ¾Æ´Ô
+SELECT ROWNUM, ENAME, SAL FROM EMP; -- ROWNUM: EMPí…Œì´ë¸”ì—ì„œ ê°€ì ¸ì˜¨ ìˆœì„œ
+-- SALë“±ìˆ˜, ENAME, SAL
+SELECT ROWNUM, ENAME, SAL FROM EMP ORDER BY SAL DESC; -- ë“±ìˆ˜ê°€ ì•„ë‹˜
 
 SELECT ROWNUM, ENAME, SAL FROM (SELECT * FROM EMP ORDER BY SAL)
-WHERE ROWNUM < 6; -- 1µîºÎÅÍ 5µî±îÁö
+WHERE ROWNUM < 6; -- 1ë“±ë¶€í„° 5ë“±ê¹Œì§€
 
 SELECT ROWNUM, ENAME, SAL FROM (SELECT * FROM EMP ORDER BY SAL)
-WHERE ROWNUM BETWEEN 6 AND 10; -- 6µîºÎÅÍ 10µî±îÁö(X)
+WHERE ROWNUM BETWEEN 6 AND 10; -- 6ë“±ë¶€í„° 10ë“±ê¹Œì§€(X)
 
 SELECT RN, ENAME, SAL FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM EMP ORDER BY SAL) A)
-WHERE RN BETWEEN 6 AND 10; -- 6µîºÎÅÍ 10µî±îÁö(O)
+WHERE RN BETWEEN 6 AND 10; -- 6ë“±ë¶€í„° 10ë“±ê¹Œì§€(O)
 
-SELECT RANK() OVER(ORDER BY SAL) RANK, ENAME, SAL FROM EMP; -- ·©Å©ÇÔ¼ö´Â µî¼ö±¸ºÐ ºÒ°¡
+SELECT RANK() OVER(ORDER BY SAL) RANK, ENAME, SAL FROM EMP; -- ëž­í¬í•¨ìˆ˜ëŠ” ë“±ìˆ˜êµ¬ë¶„ ë¶ˆê°€
 SELECT DENSE_RANK() OVER(ORDER BY SAL) RANK, ENAME, SAL FROM EMP;
 SELECT ROW_NUMBER() OVER(ORDER BY SAL) RANK, ENAME, SAL FROM EMP;
 
 
--- 1. ºÎ¼­¸í°ú »ç¿ø¸íÀ» Ãâ·ÂÇÏ´Â ¿ëµµÀÇ ºä, DNAME_ENAME_VU ¸¦ ÀÛ¼ºÇÏ½Ã¿À
+-- 1. ë¶€ì„œëª…ê³¼ ì‚¬ì›ëª…ì„ ì¶œë ¥í•˜ëŠ” ìš©ë„ì˜ ë·°, DNAME_ENAME_VU ë¥¼ ìž‘ì„±í•˜ì‹œì˜¤
 CREATE OR REPLACE VIEW DNAME_ENAME_VU
     AS SELECT DNAME, ENAME FROM EMP E, DEPT D WHERE E.DEPTNO=D.DEPTNO;
 
 SELECT * FROM DNAME_ENAME_VU;
 
--- 2. »ç¿ø¸í°ú Á÷¼Ó»ó°ü¸íÀ» Ãâ·ÂÇÏ´Â ¿ëµµÀÇ ºä,  WORKER_MANAGER_VU¸¦ ÀÛ¼ºÇÏ½Ã¿À
+-- 2. ì‚¬ì›ëª…ê³¼ ì§ì†ìƒê´€ëª…ì„ ì¶œë ¥í•˜ëŠ” ìš©ë„ì˜ ë·°,  WORKER_MANAGER_VUë¥¼ ìž‘ì„±í•˜ì‹œì˜¤
 CREATE OR REPLACE VIEW WORKER_MANAGER_VU
-    AS SELECT W.ENAME, M.ENAME AS Á÷¼Ó»ó°ü FROM EMP W, EMP M WHERE W.MGR=M.EMPNO;
+    AS SELECT W.ENAME, M.ENAME AS ì§ì†ìƒê´€ FROM EMP W, EMP M WHERE W.MGR=M.EMPNO;
 
 SELECT * FROM WORKER_MANAGER_VU;
 
--- 3. ºÎ¼­º° ±Þ¿©ÇÕ°è µî¼ö¸¦ Ãâ·ÂÇÏ½Ã¿À(ºÎ¼­¹øÈ£, ±Þ¿©ÇÕ°è, µî¼ö)
-SELECT DEPTNO, SUMSAL, ROWNUM µî¼ö FROM(SELECT DEPTNO, SUM(SAL) SUMSAL FROM EMP GROUP BY DEPTNO ORDER BY SUM(SAL) DESC);
+-- 3. ë¶€ì„œë³„ ê¸‰ì—¬í•©ê³„ ë“±ìˆ˜ë¥¼ ì¶œë ¥í•˜ì‹œì˜¤(ë¶€ì„œë²ˆí˜¸, ê¸‰ì—¬í•©ê³„, ë“±ìˆ˜)
+SELECT DEPTNO, SUMSAL, ROWNUM ë“±ìˆ˜ FROM(SELECT DEPTNO, SUM(SAL) SUMSAL FROM EMP GROUP BY DEPTNO ORDER BY SUM(SAL) DESC);
 
--- 4. »ç¿øÅ×ÀÌºí¿¡¼­ »ç¹ø, »ç¿ø¸í, ÀÔ»çÀÏÀ» ÀÔ»çÀÏÀÌ ÃÖ½Å¿¡¼­ ¿À·¡µÈ »ç¿ø ¼øÀ¸·Î Á¤·ÄÇÏ½Ã¿À
+-- 4. ì‚¬ì›í…Œì´ë¸”ì—ì„œ ì‚¬ë²ˆ, ì‚¬ì›ëª…, ìž…ì‚¬ì¼ì„ ìž…ì‚¬ì¼ì´ ìµœì‹ ì—ì„œ ì˜¤ëž˜ëœ ì‚¬ì› ìˆœìœ¼ë¡œ ì •ë ¬í•˜ì‹œì˜¤
 SELECT EMPNO, ENAME, HIREDATE FROM EMP ORDER BY HIREDATE DESC;
 
--- 5. »ç¿øÅ×ÀÌºí¿¡¼­ »ç¹ø, »ç¿ø¸í, ÀÔ»çÀÏÀ» ÀÔ»çÀÏÀÌ ÃÖ½Å¿¡¼­ ¿À·¡µÈ »ç¿ø 5¸íÀ» Ãâ·ÂÇÏ½Ã¿À
+-- 5. ì‚¬ì›í…Œì´ë¸”ì—ì„œ ì‚¬ë²ˆ, ì‚¬ì›ëª…, ìž…ì‚¬ì¼ì„ ìž…ì‚¬ì¼ì´ ìµœì‹ ì—ì„œ ì˜¤ëž˜ëœ ì‚¬ì› 5ëª…ì„ ì¶œë ¥í•˜ì‹œì˜¤
 SELECT EMPNO, ENAME, HIREDATE FROM (SELECT ROWNUM RN, A.* FROM EMP A ORDER BY HIREDATE DESC)
 WHERE RN < 6;
 
--- 6. »ç¿ø Å×ÀÌºí¿¡¼­ »ç¹ø, »ç¿ø¸í, ÀÔ»çÀÏÀ» ÃÖ½ÅºÎÅÍ ¿À·¡µÈ ¼øÀ¸·Î 6¹øÂ°·Î ´ÊÀº »ç¿øºÎÅÍ 10¹øÂ° »ç¿ø±îÁö Ãâ·Â
+-- 6. ì‚¬ì› í…Œì´ë¸”ì—ì„œ ì‚¬ë²ˆ, ì‚¬ì›ëª…, ìž…ì‚¬ì¼ì„ ìµœì‹ ë¶€í„° ì˜¤ëž˜ëœ ìˆœìœ¼ë¡œ 6ë²ˆì§¸ë¡œ ëŠ¦ì€ ì‚¬ì›ë¶€í„° 10ë²ˆì§¸ ì‚¬ì›ê¹Œì§€ ì¶œë ¥
 SELECT RN, EMPNO, ENAME, HIREDATE 
     FROM (SELECT ROWNUM RN, EMPNO, ENAME, HIREDATE FROM 
             (SELECT * FROM EMP ORDER BY HIREDATE DESC))
 WHERE RN BETWEEN 6 AND 10;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

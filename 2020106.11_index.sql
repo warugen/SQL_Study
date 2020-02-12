@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------------------
--- Á¶È¸¼Óµµ¸¦ ³ôÀÌ±â À§ÇÑ ÀÎµ¦½º
+-- ì¡°íšŒì†ë„ë¥¼ ë†’ì´ê¸° ìœ„í•œ ì¸ë±ìŠ¤
 ------------------------------------------------------------------------------------------
 
 DROP TABLE EMP01;
@@ -19,14 +19,14 @@ INSERT INTO EMP01 SELECT * FROM EMP01;
 
 SELECT TO_CHAR(COUNT(*) , '999,999') FROM EMP01;
 
-SELECT * FROM USER_INDEXES; -- ¸¸µé¾îÁø ÀÎµ¦½º È®ÀÎÇÏ±â EMP01°ú °ü·ÃµÈ ÀÎµ¦½º ¾ø´Â°ÍÀ» È®ÀÎ
+SELECT * FROM USER_INDEXES; -- ë§Œë“¤ì–´ì§„ ì¸ë±ìŠ¤ í™•ì¸í•˜ê¸° EMP01ê³¼ ê´€ë ¨ëœ ì¸ë±ìŠ¤ ì—†ëŠ”ê²ƒì„ í™•ì¸
 
-SELECT * FROM EMP01 WHERE ENAME = 'HONG'; -- 0.007ÃÊ
+SELECT * FROM EMP01 WHERE ENAME = 'HONG'; -- 0.007ì´ˆ
 
-CREATE INDEX IDX_EMP01_ENAME ON EMP01(ENAME); -- ÀÎµ¦½º »ý¼º
+CREATE INDEX IDX_EMP01_ENAME ON EMP01(ENAME); -- ì¸ë±ìŠ¤ ìƒì„±
 
-SELECT * FROM EMP01 WHERE ENAME = 'HONG'; -- 0.003ÃÊ
+SELECT * FROM EMP01 WHERE ENAME = 'HONG'; -- 0.003ì´ˆ
 
-DROP INDEX IDX_EMP01_ENAME; -- ÀÎµ¦½º »èÁ¦
+DROP INDEX IDX_EMP01_ENAME; -- ì¸ë±ìŠ¤ ì‚­ì œ
 
--- ÀÎµ¦½º¸¦ »ý¼ºÇÑ´ÙÀ½ µ¥ÀÌÅÍ¸¦ »ðÀÔÇÏ¸é ´Ù½Ã ÀÎµ¦½º Æ®¸®¸¦ ¸¸µé±â¶§¹®¿¡ ½Ã°£ÀÌ ¿À·¡°É¸°´Ù.
+-- ì¸ë±ìŠ¤ë¥¼ ìƒì„±í•œë‹¤ìŒ ë°ì´í„°ë¥¼ ì‚½ìž…í•˜ë©´ ë‹¤ì‹œ ì¸ë±ìŠ¤ íŠ¸ë¦¬ë¥¼ ë§Œë“¤ê¸°ë•Œë¬¸ì— ì‹œê°„ì´ ì˜¤ëž˜ê±¸ë¦°ë‹¤.

@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------------------
--- Æ®·£Àè¼Ç
+-- íŠ¸ëžœìž­ì…˜
 ------------------------------------------------------------------------------------------
 
 COMMIT;
@@ -9,16 +9,16 @@ CREATE TABLE DEPT01 AS SELECT * FROM DEPT;
 
 SELECT * FROM DEPT01;
 DELETE FROM DEPT01 WHERE DEPTNO = 40;
-COMMIT; -- º¹±¸ºÒ°¡
+COMMIT; -- ë³µêµ¬ë¶ˆê°€
 
 DELETE FROM DEPT01 WHERE DEPTNO=30;
-SAVEPOINT C1; -- C1½ÃÁ¡À¸·Î ÀúÀå 
+SAVEPOINT C1; -- C1ì‹œì ìœ¼ë¡œ ì €ìž¥ 
 
 DELETE FROM DEPT01 WHERE DEPTNO=20;
-SAVEPOINT C2; -- C2½ÃÁ¡À¸·Î ÀúÀå
+SAVEPOINT C2; -- C2ì‹œì ìœ¼ë¡œ ì €ìž¥
 
 DELETE FROM DEPT01 WHERE DEPTNO=10;
-SELECT * FROM DEPT01; -- ¸ðµç ºÎ¼­ »èÁ¦
+SELECT * FROM DEPT01; -- ëª¨ë“  ë¶€ì„œ ì‚­ì œ
 
 ROLLBACK TO C2;
 
@@ -26,31 +26,3 @@ SELECT * FROM DEPT01;
 ROLLBACK TO C1;
 
 ROLLBACK;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
